@@ -1,0 +1,38 @@
+.fullscreen-bg {
+  /* 固定定位，使其不随滚动移动 */
+  position: fixed;
+  /* 定位在页面最左上角 */
+  top: 0;
+  left: 0;
+  /* 宽度和高度都占满整个屏幕 */
+  width: 100%;
+  height: 100%;
+  /* 设置背景图片，替换为你的图片路径 */
+  background-image: url('/images/your-background-image.jpg');
+  /* 背景图片居中显示 */
+  background-position: center center;
+  /* 背景图片不重复 */
+  background-repeat: no-repeat;
+  /* 背景图片覆盖整个div */
+  background-size: cover;
+  /* 将背景置于最底层，避免遮挡其他内容 */
+  z-index: -1;
+  /* 可选：添加轻微模糊效果增强文字可读性 */
+  /* filter: blur(2px); */
+}
+
+/* 确保body和html占满整个屏幕高度 */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* 为内容容器添加背景色和透明度，增强文字可读性 */
+.container {
+  /* 可选：添加半透明背景 */
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  /* 确保内容在背景之上 */
+  position: relative;
+  z-index: 1;
+}

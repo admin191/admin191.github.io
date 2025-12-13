@@ -67,6 +67,10 @@
 
 
 
+  
+<link rel="stylesheet" href="/css/bk.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
@@ -400,7 +404,7 @@
 <p><strong>新手易错点9：配置文件缩进错误</strong></p>
 <p>解决办法：YAML配置文件对缩进要求严格，<strong>必须用空格缩进，不能用Tab</strong>。deploy下面的type、repo、branch前面要空2个空格，冒号后面要空1个空格。缩进错了会导致部署失败。</p>
 <p><strong>新手易错点10：repo地址填错</strong></p>
-<p>解决办法：repo地址要填SSH地址，不是HTTPS地址。在GitHub仓库页面→点击“Code”→选择“SSH”，复制地址即可（格式是<a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#105;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;">git@github.com</a>:用户名&#x2F;仓库名.git）。</p>
+<p>解决办法：repo地址要填SSH地址，不是HTTPS地址。在GitHub仓库页面→点击“Code”→选择“SSH”，复制地址即可（格式是<a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#x63;&#111;&#109;">git@github.com</a>:用户名&#x2F;仓库名.git）。</p>
 <h3 id="5-3-第三步：安装hexo-deployer-git插件"><a href="#5-3-第三步：安装hexo-deployer-git插件" class="headerlink" title="5.3 第三步：安装hexo-deployer-git插件"></a>5.3 第三步：安装hexo-deployer-git插件</h3><p>Hexo需要通过这个插件实现部署到Git，终端输入（在blog目录下执行）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>npm install hexo-deployer-git --save<br></code></pre></td></tr></table></figure>
 
@@ -624,7 +628,42 @@
   
   
 </div>
+<!-- 提取banner背景作为全屏背景（保留banner原有样式） -->
+<!-- Fluid主题专属：banner背景图全屏显示（保留banner原有样式） -->
+<script>
+// 等待页面完全加载（包括图片），避免背景图还没加载就获取
+window.onload = function() {
+    // ========== 关键：Fluid主题的banner选择器是.fluid-banner ==========
+    const bannerElement = document.querySelector('.fluid-banner');
+    if (!bannerElement) return; // 没有banner则直接退出
 
+    // 获取banner的背景图片（兼容行内样式/背景图两种情况）
+    const bannerBg = getComputedStyle(bannerElement).backgroundImage;
+    if (bannerBg === 'none') return; // 没有背景图则退出
+
+    // ========== 关键：Fluid主题全局背景容器是body/html ==========
+    // 给html/body设置全屏背景，覆盖原有背景
+    document.documentElement.style.cssText = `
+        background-image: ${bannerBg}!important;
+        background-position: center center!important;
+        background-repeat: no-repeat!important;
+        background-attachment: fixed!important;
+        background-size: cover!important;
+        min-height: 100vh!important;
+    `;
+    document.body.style.cssText = `
+        background-image: ${bannerBg}!important;
+        background-position: center center!important;
+        background-repeat: no-repeat!important;
+        background-attachment: fixed!important;
+        background-size: cover!important;
+        min-height: 100vh!important;
+    `;
+
+    // 可选：如果想让banner半透明，突出全屏背景，取消下面注释
+    // bannerElement.style.opacity = '0.8';
+};
+</script>
   </footer>
 
   <!-- Scripts -->
@@ -771,8 +810,7 @@
 
 
   
-<script src="https://blog-static.cnblogs.com/files/axqa/snowflakeCursor.js"></script>
-<script src="https://files.cnblogs.com/files/quaint/sakuraPlus.js"></script>
+<script src="/js/bg.js"></script>
 
 
 

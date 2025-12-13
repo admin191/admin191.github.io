@@ -69,6 +69,10 @@
 
 
 
+  
+<link rel="stylesheet" href="/css/bk.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
@@ -312,7 +316,7 @@
 
 <h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h2><ul>
 <li><strong>QQ</strong>: <a target="_blank" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&uin=3342515521&site=qq&menu=yes">3342515521&#x2F;Swiftie_G</a></li>
-<li><strong>邮箱</strong>: <a href="mailto:&#x73;&#x79;&#x78;&#x31;&#x31;&#49;&#x30;&#49;&#50;&#x40;&#x68;&#x6f;&#x74;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#111;&#109;">syx111012@hotmail.com</a></li>
+<li><strong>邮箱</strong>: <a href="mailto:&#x73;&#121;&#x78;&#49;&#x31;&#49;&#x30;&#49;&#x32;&#64;&#x68;&#x6f;&#x74;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;">syx111012@hotmail.com</a></li>
 <li><strong>GitHub</strong>: <a target="_blank" rel="noopener" href="https://github.com/admin191">admin191</a></li>
 <li><strong>博客</strong>: <a href="http://www.aoo.life/">http://www.aoo.life</a></li>
 </ul>
@@ -525,7 +529,42 @@
   
   
 </div>
+<!-- 提取banner背景作为全屏背景（保留banner原有样式） -->
+<!-- Fluid主题专属：banner背景图全屏显示（保留banner原有样式） -->
+<script>
+// 等待页面完全加载（包括图片），避免背景图还没加载就获取
+window.onload = function() {
+    // ========== 关键：Fluid主题的banner选择器是.fluid-banner ==========
+    const bannerElement = document.querySelector('.fluid-banner');
+    if (!bannerElement) return; // 没有banner则直接退出
 
+    // 获取banner的背景图片（兼容行内样式/背景图两种情况）
+    const bannerBg = getComputedStyle(bannerElement).backgroundImage;
+    if (bannerBg === 'none') return; // 没有背景图则退出
+
+    // ========== 关键：Fluid主题全局背景容器是body/html ==========
+    // 给html/body设置全屏背景，覆盖原有背景
+    document.documentElement.style.cssText = `
+        background-image: ${bannerBg}!important;
+        background-position: center center!important;
+        background-repeat: no-repeat!important;
+        background-attachment: fixed!important;
+        background-size: cover!important;
+        min-height: 100vh!important;
+    `;
+    document.body.style.cssText = `
+        background-image: ${bannerBg}!important;
+        background-position: center center!important;
+        background-repeat: no-repeat!important;
+        background-attachment: fixed!important;
+        background-size: cover!important;
+        min-height: 100vh!important;
+    `;
+
+    // 可选：如果想让banner半透明，突出全屏背景，取消下面注释
+    // bannerElement.style.opacity = '0.8';
+};
+</script>
   </footer>
 
   <!-- Scripts -->
@@ -672,8 +711,7 @@
 
 
   
-<script src="https://blog-static.cnblogs.com/files/axqa/snowflakeCursor.js"></script>
-<script src="https://files.cnblogs.com/files/quaint/sakuraPlus.js"></script>
+<script src="/js/bg.js"></script>
 
 
 

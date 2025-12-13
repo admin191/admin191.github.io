@@ -59,6 +59,10 @@
 
 
 
+  
+<link rel="stylesheet" href="/css/bk.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
@@ -295,7 +299,42 @@
   
   
 </div>
+<!-- 提取banner背景作为全屏背景（保留banner原有样式） -->
+<!-- Fluid主题专属：banner背景图全屏显示（保留banner原有样式） -->
+<script>
+// 等待页面完全加载（包括图片），避免背景图还没加载就获取
+window.onload = function() {
+    // ========== 关键：Fluid主题的banner选择器是.fluid-banner ==========
+    const bannerElement = document.querySelector('.fluid-banner');
+    if (!bannerElement) return; // 没有banner则直接退出
 
+    // 获取banner的背景图片（兼容行内样式/背景图两种情况）
+    const bannerBg = getComputedStyle(bannerElement).backgroundImage;
+    if (bannerBg === 'none') return; // 没有背景图则退出
+
+    // ========== 关键：Fluid主题全局背景容器是body/html ==========
+    // 给html/body设置全屏背景，覆盖原有背景
+    document.documentElement.style.cssText = `
+        background-image: ${bannerBg}!important;
+        background-position: center center!important;
+        background-repeat: no-repeat!important;
+        background-attachment: fixed!important;
+        background-size: cover!important;
+        min-height: 100vh!important;
+    `;
+    document.body.style.cssText = `
+        background-image: ${bannerBg}!important;
+        background-position: center center!important;
+        background-repeat: no-repeat!important;
+        background-attachment: fixed!important;
+        background-size: cover!important;
+        min-height: 100vh!important;
+    `;
+
+    // 可选：如果想让banner半透明，突出全屏背景，取消下面注释
+    // bannerElement.style.opacity = '0.8';
+};
+</script>
   </footer>
 
   <!-- Scripts -->
@@ -349,8 +388,7 @@
 
 
   
-<script src="https://blog-static.cnblogs.com/files/axqa/snowflakeCursor.js"></script>
-<script src="https://files.cnblogs.com/files/quaint/sakuraPlus.js"></script>
+<script src="/js/bg.js"></script>
 
 
 
